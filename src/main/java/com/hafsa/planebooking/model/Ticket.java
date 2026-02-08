@@ -1,3 +1,4 @@
+package com.hafsa.planebooking.model;
 
     import java.io.FileWriter;
 

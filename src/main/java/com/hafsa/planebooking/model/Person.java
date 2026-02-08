@@ -1,3 +1,4 @@
+package com.hafsa.planebooking.model;
 
     public class Person {
         private String name;
