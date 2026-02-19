@@ -26,7 +26,7 @@ public class BookingService {
         }
         return row;
     }
-    public static Ticket buy_seat(int[] A,int[] B,int[] C ,int[] D,Ticket[] tickets) {
+    public static Ticket buy_seat(int[][] seats, Ticket[] tickets) {
         //initializing variables
         int seatValid = 0;
         String row="";
@@ -51,42 +51,20 @@ public class BookingService {
                     seatValid=1;
 
                     //recording seat as sold if available
+                    int rowIndex = -1;
                     switch (row) {
-                        case "A":
-                            if (A[seatNum] == 0) {
-                                A[seatNum] = 1;
-                            } else {
-                                System.out.println("Seat not available");
-                                seatUnavailable=1;
-                            }
-                            break;
-
-                        case "B":
-                            if (B[seatNum] == 0) {
-                                B[seatNum] = 1;
-                            } else {
-                                System.out.println("Seat not available");
-                                seatUnavailable=1;
-                            }
-                            break;
-
-                        case "C":
-                            if (C[seatNum] == 0) {
-                                C[seatNum] = 1;
-                            } else {
-                                System.out.println("Seat not available");
-                                seatUnavailable=1;
-                            }
-                            break;
-
-                        case "D":
-                            if (D[seatNum] == 0) {
-                                D[seatNum] = 1;
-                            } else {
-                                System.out.println("Seat not available");
-                                seatUnavailable=1;
-                            }
-                            break;
+                        case "A": rowIndex = 0; break;
+                        case "B": rowIndex = 1; break;
+                        case "C": rowIndex = 2; break;
+                        case "D": rowIndex = 3; break;
+                    }
+                    if (rowIndex >= 0) {
+                        if (seats[rowIndex][seatNum] == 0) {
+                            seats[rowIndex][seatNum] = 1;
+                        } else {
+                            System.out.println("Seat not available");
+                            seatUnavailable = 1;
+                        }
                     }
 
                     //catching error that could occur if user inputs a letter and setting seat number as invalid.
@@ -136,7 +114,7 @@ public class BookingService {
 
     }
 
-    public static void cancel_seat(int[] A, int[] B, int[] C , int[] D, Ticket[] tickets) {
+    public static void cancel_seat(int[][] seats, Ticket[] tickets) {
         //initializing variables
         int seatValid = 0;
         int seatNum = 0;
@@ -151,40 +129,20 @@ public class BookingService {
                 System.out.print("Enter seat number: ");
                 //saving seat number index value
                 seatNum = input.nextInt() - 1;
-                //recording seat as available if not already available
+                int rowIndex = -1;
                 switch (row) {
-                    case "A":
-                        if (A[seatNum] == 0){
-                            System.out.println("Seat is already available.");
-                            seatAvailable=1;
-                        }
-                        else{
-                            A[seatNum] = 0;}
-                        break;
-                    case "B":
-                        if (B[seatNum] == 0){
-                            System.out.println("Seat is already available.");
-                            seatAvailable=1;
-                        }
-                        else{
-                            B[seatNum] = 0;}
-                        break;
-                    case "C":
-                        if (C[seatNum] == 0){
-                            System.out.println("Seat is already available.");
-                            seatAvailable=1;
-                        }
-                        else{
-                            C[seatNum] = 0;}
-                        break;
-                    case "D":
-                        if (D[seatNum] == 0){
-                            System.out.println("Seat is already available.");
-                            seatAvailable=1;
-                        }
-                        else{
-                            D[seatNum] = 0;}
-                        break;
+                    case "A": rowIndex = 0; break;
+                    case "B": rowIndex = 1; break;
+                    case "C": rowIndex = 2; break;
+                    case "D": rowIndex = 3; break;
+                }
+                if (rowIndex >= 0) {
+                    if (seats[rowIndex][seatNum] == 0) {
+                        System.out.println("Seat is already available.");
+                        seatAvailable = 1;
+                    } else {
+                        seats[rowIndex][seatNum] = 0;
+                    }
                 }
                 seatValid = 1;
                 //catching error that could occur if user inputs a letter and setting seat number as invalid.

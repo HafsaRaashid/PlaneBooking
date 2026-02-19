@@ -19,10 +19,7 @@ public class PlaneManagement {
 
         //Implementing the seat management system using standard arrays.
         // 0 indicates that a seat is available,and 1 indicates that a seat has been sold.
-        int[] A = new int[14];
-        int[] B = new int[12];
-        int[] C = new int[12];
-        int[] D = new int[14];
+        int[][] seats = new int[][]{ new int[14], new int[12], new int[12], new int[14] };
 
         //Creating a ticket object.
         Ticket[] tickets = new Ticket[52];
@@ -57,20 +54,20 @@ public class PlaneManagement {
                         break;
                     case 1:
                         //buy a seat
-                        Ticket ticket=BookingService.buy_seat(A,B,C,D,tickets);
+                        Ticket ticket=BookingService.buy_seat(seats,tickets);
                         ticket.save();
                         break;
                     case 2:
                         //cancels a seat.
-                        BookingService.cancel_seat(A,B,C,D,tickets);
+                        BookingService.cancel_seat(seats,tickets);
                         break;
                     case 3:
                         //find first available seat.
-                        SeatService.findFirstAvailable(A,B,C,D);
+                        SeatService.findFirstAvailable(seats);
                         break;
                     case 4:
                         //prints seating plan.
-                        SeatService.showSeatingPlan(A,B,C,D);
+                        SeatService.showSeatingPlan(seats);
                         break;
                     case 5:
                         //print tickets information.
